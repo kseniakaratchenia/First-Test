@@ -1,4 +1,4 @@
-@Test
+ @Test
     public void firstTest()
     {
         waitForElementAndClick(
@@ -25,3 +25,21 @@
 
 
     }
+
+    private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+        wait.withMessage(error_message + "\n");
+        return wait.until(
+                ExpectedConditions.presenceOfElementLocated(by)
+        );
+    }
+    
+    private WebElement waitForElementAndClick(By by, String error_message, long timeoutInSeconds)
+    {
+        WebElement element = waitForElementPresent(by, error_message, 5);
+        element.click();
+        return element;
+    }
+
+}
